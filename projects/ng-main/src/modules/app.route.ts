@@ -26,6 +26,11 @@ export const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
+        path: 'nosr-with-shared-service-demo',
+        loadChildren: () => import('./nosr-with-shared-service-demo/nosr-with-shared-service-demo.module')
+          .then(m => m.NosrWithSharedServiceDemoModule)
+      },
+      {
         path: 'login',
         loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
       }
@@ -47,7 +52,7 @@ export const routes: Routes = [
     GuardModule.forRoot(),
     ServiceModule.forRoot(),
     ResolveModule.forRoot(),
-    RouterModule.forRoot(routes, { enableTracing: false, relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(routes, {enableTracing: false, relativeLinkResolution: 'legacy'})
   ],
   exports: [
     RouterModule
