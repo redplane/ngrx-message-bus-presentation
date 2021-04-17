@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {ModuleLevelMessageEvent} from '../../../models/module-level-message-event';
+import {INgRxMessageBusService, MESSAGE_BUS_SERVICE_PROVIDER} from 'ngrx-message-bus';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -7,4 +9,17 @@ import {Component} from '@angular/core';
 })
 export class NosrComponent1Component {
 
+  //#region Constructor
+  public constructor(@Inject(MESSAGE_BUS_SERVICE_PROVIDER) protected messageBusService: INgRxMessageBusService) {
+
+  }
+
+  //#endregion
+  public sendClicked(): void {
+    const channelEvent = new ModuleLevelMessageEvent();
+    const message = 'Component 1 button has been clicked';
+
+    this.messageBusService
+      .addTypedMessage(channelEvent, message);
+  }
 }
