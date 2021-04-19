@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {INgRxMessageBusService, MESSAGE_BUS_SERVICE_PROVIDER} from 'ngrx-message-bus';
 import {ModuleLevelMessageEvent} from '../../../models/module-level-message-event';
@@ -8,17 +8,32 @@ import {ModuleLevelMessageEvent} from '../../../models/module-level-message-even
   selector: 'nosr-component-2',
   templateUrl: 'nosr-component-2.component.html'
 })
-export class NosrComponent2Component implements OnDestroy{
+export class NosrComponent2Component implements OnInit, OnDestroy {
+
+  //#region Properties
+
   private readonly _subscription: Subscription;
+
   public message: string;
 
-  public constructor(@Inject(MESSAGE_BUS_SERVICE_PROVIDER) public messageBusService: INgRxMessageBusService) {
+  //#endregion
+
+  //#region Constructor
+
+  public constructor(@Inject(MESSAGE_BUS_SERVICE_PROVIDER)
+                     public messageBusService: INgRxMessageBusService) {
+
     // Initialize subscription manager.
     this._subscription = new Subscription();
+  }
 
-    const channelEvent = new ModuleLevelMessageEvent();
+  //#endregion
+
+  //#region Methods
+
+  public ngOnInit(): void {
     const hookParentTypedMessageSubscription = this.messageBusService
-      .hookTypedMessageChannel(channelEvent)
+      .hookMessageChannel('channel-01', 'event-01')
       .subscribe((value: string) => {
         this.message = value;
       });
@@ -33,4 +48,6 @@ export class NosrComponent2Component implements OnDestroy{
       this._subscription.unsubscribe();
     }
   }
+
+  //#endregion
 }

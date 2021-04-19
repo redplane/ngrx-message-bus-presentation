@@ -1,7 +1,7 @@
 import {TypedChannelEvent} from 'ngrx-message-bus';
 
-export class ModuleLevelMessageEvent extends TypedChannelEvent<string> {
-
+export class OutgoingChannelEvent extends TypedChannelEvent<string> {
+  
   //#region Properties
 
   public readonly channelName: string;
@@ -12,9 +12,13 @@ export class ModuleLevelMessageEvent extends TypedChannelEvent<string> {
 
   //#region Constructor
 
-  constructor() {
+  public constructor() {
     super();
+
+    this.channelName = 'cnd-channel';
+    this.eventName = 'cnd-event';
   }
 
   //#endregion
+
 }

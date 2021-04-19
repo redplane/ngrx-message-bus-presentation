@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-6">
+
+    <b>Input message to send</b>
+    <div class="form-group">
+      <input class="form-control" [(ngModel)]="message">
+    </div>
+    <button class="btn btn-outline-primary"
+            [disabled]="!message || !message.length"
+            (click)="clickSendMessage()">Send message</button>
+  </div>
+
+  <div class="col-6">
+    <cnd-component-01></cnd-component-01>
+  </div>
+</div>

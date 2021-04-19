@@ -12,11 +12,6 @@ export class AuthenticatedLayoutComponent implements OnInit {
 
   //#region Properties
 
-  /*
-  * Profile information.
-  * */
-  public profile: ProfileViewModel;
-
   @HostBinding('id')
   public readonly hostId = 'wrapper';
 
@@ -40,9 +35,6 @@ export class AuthenticatedLayoutComponent implements OnInit {
   * Event which is called when component has been initiated.
   * */
   public ngOnInit(): void {
-    this.activatedRoute.data.subscribe((x: any) => {
-      this.profile = <ProfileViewModel>x.profile;
-    });
   }
 
   //#endregion

@@ -1,8 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {MessageChannelConstant} from '../constants/message-channel.constant';
-import {MessageEventConstant} from '../constants/message-event.constant';
 import {TranslateService} from '@ngx-translate/core';
 
 

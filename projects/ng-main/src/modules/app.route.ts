@@ -6,6 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {GuardModule} from '../guards/guard.module';
 import {ServiceModule} from '../services/service.module';
 import {ResolveModule} from '../resolves/resolve.module';
+import {AuthenticatedLayoutComponent} from './shared/authenticated-layout/authenticated-layout.component';
+import {AuthenticatedLayoutModule} from './shared/authenticated-layout/authenticated-layout.module';
 
 //#endregion
 
@@ -15,12 +17,9 @@ import {ResolveModule} from '../resolves/resolve.module';
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'prefix',
+    component: AuthenticatedLayoutComponent,
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/dashboard'
-      },
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
@@ -31,10 +30,35 @@ export const routes: Routes = [
           .then(m => m.NosrWithSharedServiceDemoModule)
       },
       {
-        path: 'login',
-        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+        path: 'ptc-demo',
+        loadChildren: () => import('./ptc-demo/ptc-demo.module')
+          .then(m => m.PtcDemoModule)
+      },
+      {
+        path: 'ctp-demo',
+        loadChildren: () => import('./ctp-demo/ctp-demo.module')
+          .then(m => m.CtpDemoModule)
+      },
+      {
+        path: 'ss-demo',
+        loadChildren: () => import('./ss-demo/ss-demo.module')
+          .then(m => m.SsDemoModule)
+      },
+      {
+        path: 'basic-rpc-demo',
+        loadChildren: () => import('./basic-rpc-demo/basic-rpc-demo.module')
+          .then(m => m.BasicRpcDemoModule)
+      },
+      {
+        path: 'typed-message-demo',
+        loadChildren: () => import('./channel-name-demo/channel-name-demo.module')
+          .then(m => m.ChannelNameDemoModule)
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '/dashboard'
   }
 ];
 
@@ -45,6 +69,7 @@ export const routes: Routes = [
     AppComponent
   ],
   imports: [
+    AuthenticatedLayoutModule,
     BrowserAnimationsModule, // required animations module
     HttpClientModule,
 

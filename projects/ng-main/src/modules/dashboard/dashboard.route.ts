@@ -11,22 +11,8 @@ import {AuthenticatedLayoutModule} from '../shared/authenticated-layout/authenti
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'prefix',
-    component: AuthenticatedLayoutComponent,
-    canActivate: [IsAuthorizedGuard],
-    resolve: {
-      profile: ProfileResolve
-    },
-    data: {
-      appCssClasses: ['skin-blue-light', 'fixed', 'sidebar-mini', 'sidebar-mini-expand-feature']
-    },
-    children: [
-      {
-        path: '',
-        component: DashboardComponent,
-        pathMatch: 'full'
-      }
-    ]
+    component: DashboardComponent,
+    pathMatch: 'full'
   }
 ];
 
